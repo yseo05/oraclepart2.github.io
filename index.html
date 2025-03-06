@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimalist Objects - 2 Input 1 Output</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+        }
+
+        .line {
+            position: absolute;
+            background-color: #000;
+            opacity: 0.5;
+            z-index: 1;
+        }
+
+        .line1, .line2, .line3 {
+            top: 20%;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+        }
+
+        .line4, .line5, .line6 {
+            left: 20%;
+            top: -100%;
+            width: 2px;
+            height: 100%;
+        }
+
+        @keyframes lineAnimationLeftToRight {
+            0% {
+                left: -100%;
+                width: 0;
+            }
+            100% {
+                left: 0;
+                width: 100%;
+            }
+        }
+
+        @keyframes lineAnimationTopToBottom {
+            0% {
+                top: -100%;
+                height: 0;
+            }
+            100% {
+                top: 0;
+                height: 100%;
+            }
+        }
+
+        .line1 {
+            animation: lineAnimationLeftToRight 3s ease-out forwards;
+            top: 20%;
+        }
+        .line2 {
+            animation: lineAnimationLeftToRight 4s ease-out forwards;
+            top: 30%;
+        }
+        .line3 {
+            animation: lineAnimationLeftToRight 5s ease-out forwards;
+            top: 45%;
+        }
+
+        .line4 {
+            animation: lineAnimationTopToBottom 3s ease-out forwards;
+            left: 10%;
+        }
+        .line5 {
+            animation: lineAnimationTopToBottom 4s ease-out forwards;
+            left: 25%;
+        }
+        .line6 {
+            animation: lineAnimationTopToBottom 5s ease-out forwards;
+            left: 80%;
+        }
+
+        h1 {
+            font-family: 'Avenir', sans-serif;
+            font-size: 36px;
+            font-weight: 100;
+            color: #333;
+        }
+
+        p {
+            font-family: 'Avenir', sans-serif;
+            font-size: 25px;
+            font-weight: 100;
+            color: #333;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 0px;
+        }
+
+        .objects {
+            display: flex;
+            justify-content: center;
+            gap: -10px;
+            margin-top: -20px;
+            width: 100%;
+            flex-wrap: wrap;
+        }
+
+        .object {
+            text-align: center;
+            margin: 0px;
+        }
+
+        .object img {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto;
+        }
+
+        .object .img1 {
+            width: 100px;
+            height: 100px;
+        }
+
+        .object .img2 {
+            width: 125px;
+            height: 125px;
+        }
+
+        .object .img3 {
+            width: 80px;
+            height: 80px;
+        }
+
+        .object .img4 {
+            width: 100px;
+            height: 100px;
+        }
+
+        .object .img5 {
+            width: 85px;
+            height: 85px;
+        }
+
+        .object .img6 {
+            width: 95px;
+            height: 95px;
+        }
+
+        .object .img7 {
+            width: 100px;
+            height: 100px;
+        }
+
+        .input-container {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        #charInput1, #charInput2 {
+            font-size: 24px;
+            padding: 10px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            width: 65px;
+            text-align: center;
+        }
+
+        #charInput1:focus, #charInput2:focus {
+            border-color: #000000;
+        }
+
+        #submitButton {
+            font-size: 18px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #000000;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+
+        #submitButton:hover {
+            background-color: #888888;
+        }
+
+        #charInput1, #charInput2, #submitButton {
+            margin-top: 10px;
+            z-index: 5;
+        }
+
+        #displayedImage {
+            margin-top: 20px;
+            max-width: 100%;
+            max-height: 400px;
+            display: none;
+        }
+
+        .input-description {
+            font-size: 16px;
+            color: #555;
+            margin-top: 0px;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 28px;
+            }
+
+            .objects {
+                gap: 10px;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .object img {
+                width: 80px;
+                height: 80px;
+            }
+
+            #charInput1, #charInput2 {
+                font-size: 20px;
+                width: 50px;
+            }
+
+            .input-container {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            #submitButton {
+                font-size: 16px;
+                padding: 8px 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 24px;
+            }
+
+            .objects {
+                gap: 8px;
+            }
+
+            .object img {
+                width: 60px;
+                height: 60px;
+            }
+
+            #charInput1, #charInput2 {
+                font-size: 18px;
+                width: 45px;
+            }
+
+            .input-description {
+                font-size: 14px;
+            }
+
+            #submitButton {
+                font-size: 14px;
+                padding: 6px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="line line1"></div>
+    <div class="line line2"></div>
+    <div class="line line3"></div>
+    <div class="line line4"></div>
+    <div class="line line5"></div>
+    <div class="line line6"></div>
+
+    <h1>Minimalist</h1>
+    <div class="content">
+        <div class="objects">
+            <div class="object">
+                <img src="img/Oo.png" alt="O" class="img1">
+            </div>
+            <div class="object">
+                <img src="img/Bb.png" alt="B" class="img2">
+            </div>
+            <div class="object">
+                <img src="img/Jj.png" alt="J" class="img3">
+            </div>
+            <div class="object">
+                <img src="img/Ee.png" alt="E" class="img4">
+            </div>
+            <div class="object">
+                <img src="img/Cc.png" alt="C" class="img5">
+            </div>
+            <div class="object">
+                <img src="img/Tt.png" alt="T" class="img6">
+            </div>
+            <div class="object">
+                <img src="img/Ss.png" alt="S" class="img7">
+            </div>
+        </div>
+
+        <!-- INPUT FIELD FOR 1 CHARACTER -->
+        <div class="input-container">
+            <input type="text" id="charInput1" maxlength="1">
+            <input type="text" id="charInput2" maxlength="1">
+        </div>
+
+        <p class="input-description">Type in 2 Letters to see an interaction of two objects! C+M, I+O, P+W</p>
+
+        <!-- BUTTON TO DISPLAY IMAGE -->
+        <button onclick="displayImage()" id="submitButton">Show Image</button>
+
+        <!-- IMAGE TO DISPLAY -->
+        <img id="displayedImage" src="" alt="Displayed Image">
+    </div>
+
+    <script>
+        function displayImage() {
+            const imgElement = document.getElementById("displayedImage");
+
+            // Letter inputs
+            const input1_letter = document.getElementById("charInput1").value.toUpperCase();
+            const input2_letter = document.getElementById("charInput2").value.toUpperCase();
+            
+            // Number conversion for comparison
+            const input1_number = input1_letter.charCodeAt(0);
+            const input2_number = input2_letter.charCodeAt(0);
+
+            // Image display conditions
+            if(input1_letter === "C" && input2_letter !== "M") {
+                imgElement.src = "https://media1.tenor.com/m/qsthhHhdjsQAAAAC/error-windows.gif";
+                imgElement.style.display = "block";
+            }
+            else if(input1_letter === "I" && input2_letter !== "O") {
+                imgElement.src = "https://media1.tenor.com/m/qsthhHhdjsQAAAAC/error-windows.gif";
+                imgElement.style.display = "block";
+            }
+            else if(input1_letter === "P" && input2_letter !== "W") {
+                imgElement.src = "https://media1.tenor.com/m/qsthhHhdjsQAAAAC/error-windows.gif";
+                imgElement.style.display = "block";
+            }
+            else if(input1_number === 67 && input2_number === 77) { 
+                imgElement.src = "https://cdn-s3.touchofmodern.com/products/001/577/878/0fa2b29e5d2369aa91b2075cf0e3f249_large.jpg?1564518511";
+                imgElement.style.display = "block";
+            }
+            else if(input1_number === 73 && input2_number === 79) { 
+                imgElement.src = "https://img.eqlstore.com/cont/web/attach_img/temp/11168599857419.jpg";
+                imgElement.style.display = "block";
+            }
+            else if(input1_number === 80 && input2_number === 87) { 
+                imgElement.src = "https://img.freepik.com/premium-photo/fork-knife-plate-with-clock-dial-isolated-black-background_771335-35630.jpg";
+                imgElement.style.display = "block";
+            }
+
+            // Math check condition
+            let mymathresult = input1_number - input2_number;
+            if(mymathresult < -10) { 
+                imgElement.src = "https://media1.tenor.com/m/qsthhHhdjsQAAAAC/error-windows.gif";
+                imgElement.style.display = "block";
+            }
+        }
+    </script>
+</body>
+</html>
